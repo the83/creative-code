@@ -5,12 +5,12 @@ install packages:
 make install
 ```
 
-watch for typescript changes in art/src directory:
+watch webpack server:
 ```
-make watch
+make run
 ```
 
-open index page in browser
+build for prod:
 ```
-make open
+make build
 ```
