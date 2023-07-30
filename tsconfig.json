@@ -1,7 +1,10 @@
 {
     "compilerOptions": {
+        "allowSyntheticDefaultImports": true,
         "noImplicitAny": true,
-        "target": "ES5",
-        "module": "ES2015"
+        "target": "ES6",
+        "lib": ["DOM", "ES6", "DOM.Iterable", "ScriptHost", "ES2016.Array.Include"],
+        "module": "ES2015",
+        "jsx": "react-jsx"
     }
 }
