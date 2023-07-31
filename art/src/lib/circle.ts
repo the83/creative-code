@@ -17,7 +17,7 @@ export default class Circle {
 
   constructor(canvasSize: number) {
     this.canvasSize = canvasSize;
-    this._reset()
+    this._reset();
   }
 
   private _reset(): void {
@@ -68,8 +68,8 @@ export default class Circle {
       return false;
     }
 
-    const [thisX, thisY] = this.nextPos
-    const [dotX, dotY] = otherCircle.nextPos
+    const [thisX, thisY] = this.nextPos;
+    const [dotX, dotY] = otherCircle.nextPos;
 
     return (
       Math.abs(thisX - dotX) < this.size) &&
@@ -95,7 +95,7 @@ export default class Circle {
       }
     });
 
-    const [nextX, nextY] = this.nextPos
+    const [nextX, nextY] = this.nextPos;
 
     if(nextX <= 0 || nextX >= this.canvasSize) {
       this.changeXDir();
