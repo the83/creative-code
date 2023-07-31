@@ -1,6 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import HelloWorld from './components/hello_world';
+import Dots from './components/dots';
 
 interface IProps {
 }
@@ -9,11 +9,7 @@ function Index(props: IProps) {
   return (
     <div>
       <div>
-        <HelloWorld />
-      </div>
-
-      <div>
-        <HelloWorld />
+        <Dots />
       </div>
     </div>
   );
