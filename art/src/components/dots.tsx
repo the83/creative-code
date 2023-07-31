@@ -17,15 +17,16 @@ function randomColor() {
 const canvasSize = 720;
 const dotSize = 30;
 const maxDotSize = 100;
-const numDots = 400;
+const numDots = 200;
 const minDotSize = 3;
+const lineLength = 50;
 
 class Dot {
   x: number;
   y: number;
   x_dir: number = 1;
   y_dir: number = 1;
-  dotSize: number = dotSize;
+  dotSize: number;
   color: string;
 
   constructor() {
@@ -56,26 +57,44 @@ class Dot {
     ];
   }
 
-  collision(dot) {
-    if (dot === this) {
+  lineCoords() {
+    return [
+      this.x,
+      this.y,
+      this.x + (-1 * this.x_dir * lineLength),
+      this.y + (-1 * this.y_dir * lineLength),
+    ];
+  }
+
+  _collision(otherDot) {
+    if (otherDot === this) {
       return false;
     }
+
     const [thisX, thisY] = this.nextPos()
-    const [dotX, dotY] = dot.nextPos()
-    return (Math.abs(thisX - dotX) < this.dotSize) && (Math.abs(thisY - dotY) < this.dotSize);
+    const [dotX, dotY] = otherDot.nextPos()
+
+    return (
+      Math.abs(thisX - dotX) < this.dotSize) &&
+      (Math.abs(thisY - dotY) < this.dotSize
+    );
+  }
+
+  _handleCollision(otherDot) {
+    this.dotSize -= 1;
+    this.changeXDir();
+    this.changeYDir();
+    otherDot.changeXDir();
+    otherDot.changeYDir();
+    if (this.dotSize <= minDotSize) {
+      this.reset();
+    }
   }
 
   move(otherDots) {
-    otherDots.forEach((dot) => {
-      if (this.collision(dot)) {
-        this.dotSize -= 1;
-        this.changeXDir();
-        this.changeYDir();
-        dot.changeXDir();
-        dot.changeYDir();
-        if (this.dotSize <= minDotSize) {
-          this.reset();
-        }
+    otherDots.forEach((otherDot) => {
+      if (this._collision(otherDot)) {
+        this._handleCollision(otherDot);
       }
     });
 
@@ -115,6 +134,7 @@ export default function Dots(props: IProps) {
     dots.forEach((dot) => {
       p5.ellipse(dot.x, dot.y, dot.dotSize, dot.dotSize);
       p5.fill(dot.color);
+      p5.line(...dot.lineCoords());
     });
 
     dots.forEach((dot) => {
