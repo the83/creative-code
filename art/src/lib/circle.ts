@@ -25,7 +25,7 @@ export default class Circle {
     this.y = randomNumber(this.canvasSize);
     this.x_dir = 1;
     this.y_dir = 1;
-    this.size = randomNumber(maxSize);
+    this.size = randomNumber(maxSize, minSize);
     this.color = randomColor();
   }
 
@@ -45,9 +45,10 @@ export default class Circle {
   }
 
   public get lineCoords(): CircleCoords {
+    const offset = Math.floor(0.5 * this.size) - 3;
     return [
-      this.x,
-      this.y,
+      this.x - offset * this.x_dir,
+      this.y - offset * this.y_dir,
       this.x + (-1 * this.x_dir * lineLength),
       this.y + (-1 * this.y_dir * lineLength),
     ];

@@ -7,13 +7,9 @@ interface IProps {
 }
 
 const canvasSize = 720;
-const numDots = 200;
+const numDots = 300;
 
 export default function Dots(props: IProps) {
-  // let x = 50;
-  // const y = 50;
-
-  // See annotations in JS for more information
   const setup = (p5: p5Types, canvasParentRef: Element) => {
     p5.createCanvas(canvasSize, canvasSize).parent(canvasParentRef);
   };
